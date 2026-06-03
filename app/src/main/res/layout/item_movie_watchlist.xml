@@ -19,7 +19,7 @@
             android:layout_width="80dp"
             android:layout_height="110dp"
             android:scaleType="centerCrop"
-            android:src="@android:color/darker_gray"
+            android:src="@drawable/oppenheimer"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

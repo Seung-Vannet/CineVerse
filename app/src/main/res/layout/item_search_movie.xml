@@ -15,7 +15,7 @@
         android:layout_width="60dp"
         android:layout_height="80dp"
         android:scaleType="centerCrop"
-        android:src="@android:color/darker_gray"
+        android:src="@drawable/johnwick4"
         app:shapeAppearanceOverlay="@style/RoundedImageView" />
 
     <LinearLayout

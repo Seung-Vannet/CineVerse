@@ -128,9 +128,23 @@
             android:clickable="true"
             android:focusable="true">
             <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent">
-                <ImageView android:layout_width="match_parent" android:layout_height="match_parent" android:scaleType="centerCrop" android:src="@android:color/darker_gray" />
-                <View android:layout_width="match_parent" android:layout_height="match_parent" android:background="@drawable/gradient_overlay" />
-                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_alignParentBottom="true" android:orientation="vertical" android:padding="20dp">
+                <ImageView 
+                    android:layout_width="match_parent" 
+                    android:layout_height="match_parent" 
+                    android:scaleType="centerCrop" 
+                    android:src="@drawable/dune2" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/gradient_overlay" />
+
+                <LinearLayout 
+                    android:layout_width="match_parent" 
+                    android:layout_height="wrap_content" 
+                    android:layout_alignParentBottom="true" 
+                    android:orientation="vertical" 
+                    android:padding="20dp">
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="DUNE PART TWO" android:textColor="@color/white" android:textSize="26sp" android:textStyle="bold" />
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="8.6 • 2024 • 2h 46m • PG-13" android:textColor="@color/cine_text_secondary" />
                     <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:ellipsize="end" android:maxLines="3" android:text="Paul Atreides unites with Chani and the Fremen while seeking revenge against the conspirators who destroyed his family." android:textColor="@color/cine_text_secondary" />
