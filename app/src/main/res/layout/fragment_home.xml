@@ -128,11 +128,12 @@
             android:clickable="true"
             android:focusable="true">
             <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent">
-                <ImageView 
-                    android:layout_width="match_parent" 
-                    android:layout_height="match_parent" 
-                    android:scaleType="centerCrop" 
-                    android:src="@drawable/dune2" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/dunetwo" />
 
                 <View
                     android:layout_width="match_parent"
@@ -149,7 +150,7 @@
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="8.6 • 2024 • 2h 46m • PG-13" android:textColor="@color/cine_text_secondary" />
                     <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:ellipsize="end" android:maxLines="3" android:text="Paul Atreides unites with Chani and the Fremen while seeking revenge against the conspirators who destroyed his family." android:textColor="@color/cine_text_secondary" />
                     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="20dp" android:orientation="horizontal">
-                        <com.google.android.material.button.MaterialButton android:id="@+id/btnPlayNow" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:backgroundTint="@color/cine_primary" android:text="Play Now" app:cornerRadius="8dp" app:icon="@drawable/ic_play_circle" />
+                        <com.google.android.material.button.MaterialButton android:id="@+id/btnPlayNow" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:backgroundTint="@color/cine_primary" android:text="Play Now" app:cornerRadius="8dp" app:icon="@android:drawable/ic_media_play" />
                         <Space android:layout_width="12dp" android:layout_height="wrap_content" />
                         <com.google.android.material.button.MaterialButton android:id="@+id/btnMyList" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:backgroundTint="#2A2A2A" android:text="+ My List" app:cornerRadius="8dp" />
                     </LinearLayout>
@@ -157,24 +158,245 @@
             </RelativeLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Movie Sections -->
+        <!-- Section: Continue Watching -->
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_margin="16dp" android:text="Continue Watching" android:textColor="@color/white" android:textSize="18sp" android:textStyle="bold" />
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvContinueWatching"
+        
+        <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:nestedScrollingEnabled="false"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            android:scrollbars="none">
+            
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingStart="8dp"
+                android:paddingEnd="16dp">
 
+                <!-- Card 1: Oppenheimer -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_oppenheimer"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    app:cardBackgroundColor="@color/cine_background"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/oppenheimer"
+                            app:shapeAppearanceOverlay="@style/RoundedImageView" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Oppenheimer"
+                            android:textColor="@color/white"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+                        <com.google.android.material.progressindicator.LinearProgressIndicator
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:progress="70"
+                            app:indicatorColor="@color/cine_primary"
+                            app:trackColor="@color/cine_surface"
+                            app:trackThickness="4dp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Card 2: The Batman -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_thebatman"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    app:cardBackgroundColor="@color/cine_background"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/thebatman"
+                            app:shapeAppearanceOverlay="@style/RoundedImageView" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="The Batman"
+                            android:textColor="@color/white"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+                        <com.google.android.material.progressindicator.LinearProgressIndicator
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:progress="40"
+                            app:indicatorColor="@color/cine_primary"
+                            app:trackColor="@color/cine_surface"
+                            app:trackThickness="4dp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Card 3: Avatar 2 -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_avatartwo"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    app:cardBackgroundColor="@color/cine_background"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/avatartwo"
+                            app:shapeAppearanceOverlay="@style/RoundedImageView" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Avatar 2"
+                            android:textColor="@color/white"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+                        <com.google.android.material.progressindicator.LinearProgressIndicator
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:progress="85"
+                            app:indicatorColor="@color/cine_primary"
+                            app:trackColor="@color/cine_surface"
+                            app:trackThickness="4dp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <!-- Section: Trending Now -->
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_margin="16dp" android:text="Trending Now" android:textColor="@color/white" android:textSize="18sp" android:textStyle="bold" />
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvTrending"
+        
+        <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:nestedScrollingEnabled="false"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            android:scrollbars="none">
+            
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingStart="8dp"
+                android:paddingEnd="16dp">
+
+                <!-- Spider-Man -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_spiderman"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    app:cardBackgroundColor="@color/cine_background"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/spiderman"
+                            app:shapeAppearanceOverlay="@style/RoundedImageView" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Spider-Man"
+                            android:textColor="@color/white"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- John Wick -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_johnwickfour"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    app:cardBackgroundColor="@color/cine_background"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/johnwickfour"
+                            app:shapeAppearanceOverlay="@style/RoundedImageView" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="John Wick 4"
+                            android:textColor="@color/white"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Interstellar -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_interstellar"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    app:cardBackgroundColor="@color/cine_background"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/interstellar"
+                            app:shapeAppearanceOverlay="@style/RoundedImageView" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Interstellar"
+                            android:textColor="@color/white"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+        </HorizontalScrollView>
 
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>
