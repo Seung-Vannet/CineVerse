@@ -12,7 +12,7 @@
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/avatar2"
+        android:src="@drawable/avatartwo"
         app:shapeAppearanceOverlay="@style/CircleImageView" />
 
     <TextView

@@ -9,16 +9,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import kh.edu.rupp.myapplication.MovieDetailsActivity;
 import kh.edu.rupp.myapplication.SearchActivity;
-import kh.edu.rupp.myapplication.adapters.MovieAdapter;
 import kh.edu.rupp.myapplication.databinding.FragmentHomeBinding;
 import kh.edu.rupp.myapplication.models.Movie;
-import java.util.ArrayList;
-import java.util.List;
 
-public class HomeFragment extends Fragment implements MovieAdapter.OnMovieClickListener {
+public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
 
@@ -32,10 +28,7 @@ public class HomeFragment extends Fragment implements MovieAdapter.OnMovieClickL
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        
         setupInteractions();
-        setupContinueWatching();
-        setupTrending();
     }
 
     private void setupInteractions() {
@@ -60,33 +53,14 @@ public class HomeFragment extends Fragment implements MovieAdapter.OnMovieClickL
             startActivity(intent);
         });
         binding.ivFilter.setOnClickListener(v -> Toast.makeText(getContext(), "Opening Filters...", Toast.LENGTH_SHORT).show());
-    }
 
-    private void setupContinueWatching() {
-        List<Movie> movies = new ArrayList<>();
-        movies.add(new Movie("Oppenheimer", "2023", "3h 0m", "8.4", "R", "Historical drama.", 0));
-        movies.add(new Movie("The Batman", "2022", "2h 56m", "8.1", "PG-13", "Detective thriller.", 0));
-        movies.add(new Movie("Avatar 2", "2022", "3h 12m", "7.6", "PG-13", "Water world.", 0));
-
-        MovieAdapter adapter = new MovieAdapter(movies, true, this);
-        binding.rvContinueWatching.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        binding.rvContinueWatching.setAdapter(adapter);
-    }
-
-    private void setupTrending() {
-        List<Movie> movies = new ArrayList<>();
-        movies.add(new Movie("Spider-Man", "2023", "2h 20m", "8.2", "PG-13", "Multiverse action.", 0));
-        movies.add(new Movie("John Wick 4", "2023", "2h 49m", "8.1", "R", "Action thriller.", 0));
-        movies.add(new Movie("Interstellar", "2014", "2h 49m", "8.7", "PG-13", "Space journey.", 0));
-
-        MovieAdapter adapter = new MovieAdapter(movies, false, this);
-        binding.rvTrending.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        binding.rvTrending.setAdapter(adapter);
-    }
-
-    @Override
-    public void onMovieClick(Movie movie) {
-        openMovieDetails(movie);
+        // Individual Movie Card Clicks
+        binding.cardOppenheimer.setOnClickListener(v -> openMovieDetails(new Movie("Oppenheimer", "2023", "3h 0m", "8.4", "R", "Historical drama.", 0)));
+        binding.cardThebatman.setOnClickListener(v -> openMovieDetails(new Movie("The Batman", "2022", "2h 56m", "8.1", "PG-13", "Detective thriller.", 0)));
+        binding.cardAvatartwo.setOnClickListener(v -> openMovieDetails(new Movie("Avatar 2", "2022", "3h 12m", "7.6", "PG-13", "Water world.", 0)));
+        binding.cardSpiderman.setOnClickListener(v -> openMovieDetails(new Movie("Spider-Man", "2023", "2h 20m", "8.2", "PG-13", "Multiverse action.", 0)));
+        binding.cardJohnwickfour.setOnClickListener(v -> openMovieDetails(new Movie("John Wick 4", "2023", "2h 49m", "8.1", "R", "Action thriller.", 0)));
+        binding.cardInterstellar.setOnClickListener(v -> openMovieDetails(new Movie("Interstellar", "2014", "2h 49m", "8.7", "PG-13", "Space journey.", 0)));
     }
 
     private void openMovieDetails(Movie movie) {

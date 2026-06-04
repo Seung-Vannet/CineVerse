@@ -11,7 +11,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material.icons.outlined.Notifications
-import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -144,7 +143,7 @@ fun FeaturedMovie() {
             .background(CineSurface)
     ) {
         Image(
-            painter = painterResource(id = R.drawable.dune2),
+            painter = painterResource(id = R.drawable.dunetwo),
             contentDescription = "Dune Part Two",
             modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.Crop
@@ -256,7 +255,7 @@ fun ContinueWatchingList() {
     val movies = listOf(
         MovieItem("Oppenheimer", "2h 20m left", 0.7f, R.drawable.oppenheimer),
         MovieItem("The Batman", "1h 05m left", 0.4f, R.drawable.thebatman),
-        MovieItem("Avatar 2", "15m left", 0.9f, R.drawable.avatar2)
+        MovieItem("Avatar 2", "15m left", 0.9f, R.drawable.avatartwo)
     )
     LazyRow(
         contentPadding = PaddingValues(horizontal = 16.dp),
@@ -312,7 +311,7 @@ fun ContinueWatchingList() {
 fun TrendingNowList() {
     val movies = listOf(
         TrendingMovie("Spider-Man", 8.7, R.drawable.spiderman),
-        TrendingMovie("John Wick", 8.1, R.drawable.johnwick4),
+        TrendingMovie("John Wick", 8.1, R.drawable.johnwickfour),
         TrendingMovie("Interstellar", 8.6, R.drawable.interstellar),
         TrendingMovie("The Batman", 8.4, R.drawable.thebatman)
     )
