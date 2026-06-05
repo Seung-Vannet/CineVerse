@@ -5,21 +5,16 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import kh.edu.rupp.myapplication.MovieDetailsActivity;
 import kh.edu.rupp.myapplication.SearchActivity;
-import kh.edu.rupp.myapplication.adapters.GenreAdapter;
-import kh.edu.rupp.myapplication.adapters.MovieAdapter;
 import kh.edu.rupp.myapplication.databinding.FragmentBrowseBinding;
-import kh.edu.rupp.myapplication.models.Genre;
 import kh.edu.rupp.myapplication.models.Movie;
-import java.util.ArrayList;
-import java.util.List;
 
-public class BrowseFragment extends Fragment implements MovieAdapter.OnMovieClickListener {
+public class BrowseFragment extends Fragment {
 
     private FragmentBrowseBinding binding;
 
@@ -33,57 +28,39 @@ public class BrowseFragment extends Fragment implements MovieAdapter.OnMovieClic
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         setupInteractions();
-        setupGenres();
-        setupNewReleases();
-        setupTopRated();
     }
 
     private void setupInteractions() {
+        // Search
         binding.ivSearch.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), SearchActivity.class);
             startActivity(intent);
         });
+
+        // Category Toggles
+        binding.btnMovies.setOnClickListener(v -> Toast.makeText(getContext(), "Movies Selected", Toast.LENGTH_SHORT).show());
+        binding.btnTvShows.setOnClickListener(v -> Toast.makeText(getContext(), "Shows Selected", Toast.LENGTH_SHORT).show());
+        binding.btnGenres.setOnClickListener(v -> Toast.makeText(getContext(), "Genres Selected", Toast.LENGTH_SHORT).show());
+
+        // Genre Manual Item Clicks
+        binding.genreAction.setOnClickListener(v -> Toast.makeText(getContext(), "Action Genre", Toast.LENGTH_SHORT).show());
+        binding.genreAdventure.setOnClickListener(v -> Toast.makeText(getContext(), "Adventure Genre", Toast.LENGTH_SHORT).show());
+        binding.genreSciFi.setOnClickListener(v -> Toast.makeText(getContext(), "Sci-Fi Genre", Toast.LENGTH_SHORT).show());
+        binding.genreThriller.setOnClickListener(v -> Toast.makeText(getContext(), "Thriller Genre", Toast.LENGTH_SHORT).show());
+
+        // New Releases Manual Blocks
+        binding.browseNewDune.setOnClickListener(v -> openMovieDetails(new Movie("Dune: Part Two", "2024", "2h 46m", "8.6", "PG-13", "Paul Atreides unites with Chani and the Fremen while seeking revenge against the conspirators who destroyed his family.", 0)));
+        binding.browseNewAvatar.setOnClickListener(v -> openMovieDetails(new Movie("Avatar 2", "2022", "3h 12m", "7.6", "PG-13", "Jake Sully lives with his newfound family formed on the extrasolar moon Pandora.", 0)));
+        binding.browseNewSpiderman.setOnClickListener(v -> openMovieDetails(new Movie("Spider-Man", "2023", "2h 20m", "8.2", "PG-13", "Miles Morales catapulted across the Multiverse, where he encounters a team of Spider-People charged with protecting its very existence.", 0)));
+
+        // Top Rated Manual Blocks
+        binding.browseTopJohnwick.setOnClickListener(v -> openMovieDetails(new Movie("John Wick 4", "2023", "2h 49m", "8.1", "R", "John Wick uncovers a path to defeating The High Table.", 0)));
+        binding.browseTopInterstellar.setOnClickListener(v -> openMovieDetails(new Movie("Interstellar", "2014", "2h 49m", "8.7", "PG-13", "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.", 0)));
+        binding.browseTopBatman.setOnClickListener(v -> openMovieDetails(new Movie("The Batman", "2022", "2h 56m", "8.1", "PG-13", "Batman ventures into Gotham City's underworld when a sadistic killer leaves behind a trail of cryptic clues.", 0)));
     }
 
-    private void setupGenres() {
-        List<Genre> genres = new ArrayList<>();
-        genres.add(new Genre("Action", android.R.drawable.ic_menu_gallery));
-        genres.add(new Genre("Adventure", android.R.drawable.ic_menu_compass));
-        genres.add(new Genre("Sci-Fi", android.R.drawable.ic_menu_share));
-        genres.add(new Genre("Thriller", android.R.drawable.ic_menu_camera));
-        genres.add(new Genre("Drama", android.R.drawable.ic_menu_view));
-
-        GenreAdapter adapter = new GenreAdapter(genres);
-        binding.rvGenres.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        binding.rvGenres.setAdapter(adapter);
-    }
-
-    private void setupNewReleases() {
-        List<Movie> movies = new ArrayList<>();
-        movies.add(new Movie("Dune Part Two", "2024", "2h 46m", "8.6", "PG-13", "Epic sci-fi action.", 0));
-        movies.add(new Movie("Godzilla Minus One", "2023", "2h 4m", "7.8", "PG-13", "Giant monster movie.", 0));
-        movies.add(new Movie("Mission Impossible", "2023", "2h 43m", "7.6", "PG-13", "Spy action.", 0));
-
-        MovieAdapter adapter = new MovieAdapter(movies, false, this);
-        binding.rvNewReleases.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        binding.rvNewReleases.setAdapter(adapter);
-    }
-
-    private void setupTopRated() {
-        List<Movie> movies = new ArrayList<>();
-        movies.add(new Movie("Interstellar", "2014", "2h 49m", "8.7", "PG-13", "Space exploration.", 0));
-        movies.add(new Movie("John Wick 4", "2023", "2h 49m", "8.1", "R", "Action thriller.", 0));
-        movies.add(new Movie("The Dark Knight", "2008", "2h 32m", "9.0", "PG-13", "Batman movie.", 0));
-
-        MovieAdapter adapter = new MovieAdapter(movies, false, this);
-        binding.rvTopRated.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        binding.rvTopRated.setAdapter(adapter);
-    }
-
-    @Override
-    public void onMovieClick(Movie movie) {
+    private void openMovieDetails(Movie movie) {
         Intent intent = new Intent(getContext(), MovieDetailsActivity.class);
         intent.putExtra("movie", movie);
         startActivity(intent);
