@@ -200,16 +200,16 @@
 
                         <TextView
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="Oppenheimer"
+                            android:layout_marginStart="8dp" android:text="Oppenheimer"
                             android:textColor="@color/white"
                             android:textSize="14sp"
                             android:textStyle="bold" />
 
                         <com.google.android.material.progressindicator.LinearProgressIndicator
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_marginTop="8dp"
                             android:progress="70"
                             app:indicatorColor="@color/cine_primary"
@@ -241,7 +241,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="The Batman"
+                            android:layout_marginStart="8dp" android:text="The Batman"
                             android:textColor="@color/white"
                             android:textSize="14sp"
                             android:textStyle="bold" />
@@ -279,7 +279,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="Avatar 2"
+                            android:layout_marginStart="8dp" android:text="Avatar 2"
                             android:textColor="@color/white"
                             android:textSize="14sp"
                             android:textStyle="bold" />
@@ -335,7 +335,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="Spider-Man"
+                            android:layout_marginStart="8dp" android:text="Spider-Man"
                             android:textColor="@color/white"
                             android:textSize="14sp"
                             android:textStyle="bold" />
@@ -365,7 +365,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="John Wick 4"
+                            android:layout_marginStart="8dp" android:text="John Wick 4"
                             android:textColor="@color/white"
                             android:textSize="14sp"
                             android:textStyle="bold" />
@@ -395,7 +395,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="Interstellar"
+                            android:layout_marginStart="8dp" android:text="Interstellar"
                             android:textColor="@color/white"
                             android:textSize="14sp"
                             android:textStyle="bold" />
