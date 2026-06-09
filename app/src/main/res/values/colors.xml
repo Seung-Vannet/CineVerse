@@ -3,11 +3,16 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     
-    <!-- Cineverse Premium Theme -->
-    <color name="cine_background">#0A0A0A</color>
-    <color name="cine_surface">#1A1A1A</color>
-    <color name="cine_primary">#E50914</color> <!-- Netflix-like Red -->
+    <!-- CINEVERSE Premium Theme -->
+    <color name="cine_background">#000000</color>
+    <color name="cine_surface">#121212</color>
+    <color name="cine_primary">#FF003C</color> <!-- Accent Red -->
+    <color name="cine_primary_variant">#80FF003C</color>
     <color name="cine_text_primary">#FFFFFF</color>
     <color name="cine_text_secondary">#B3B3B3</color>
     <color name="cine_card_bg">#121212</color>
+    
+    <!-- Glassmorphism Helpers -->
+    <color name="glass_white">#1AFFFFFF</color>
+    <color name="glass_border">#33FFFFFF</color>
 </resources>
