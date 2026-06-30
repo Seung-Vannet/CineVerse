@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import kh.edu.rupp.myapplication.databinding.ItemMovieHorizontalBinding;
 import kh.edu.rupp.myapplication.models.Movie;
+import kh.edu.rupp.myapplication.utils.MovieImageLoader;
 import java.util.List;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
@@ -46,7 +47,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
             holder.binding.progressIndicator.setVisibility(View.GONE);
         }
         
-        holder.binding.ivPoster.setImageResource(android.R.color.darker_gray);
+        MovieImageLoader.load(holder.binding.ivPoster, movie);
 
         holder.itemView.setOnClickListener(v -> {
             if (listener != null) {

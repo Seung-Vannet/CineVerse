@@ -9,14 +9,26 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import kh.edu.rupp.myapplication.MovieDetailsActivity;
 import kh.edu.rupp.myapplication.SearchActivity;
+import kh.edu.rupp.myapplication.adapters.MovieAdapter;
+import kh.edu.rupp.myapplication.api.MovieResponse;
+import kh.edu.rupp.myapplication.data.MovieCatalog;
+import kh.edu.rupp.myapplication.data.MovieMapper;
+import kh.edu.rupp.myapplication.data.MovieRepository;
+import kh.edu.rupp.myapplication.db.AppDatabase;
 import kh.edu.rupp.myapplication.databinding.FragmentHomeBinding;
 import kh.edu.rupp.myapplication.models.Movie;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements MovieAdapter.OnMovieClickListener {
 
     private FragmentHomeBinding binding;
+    private MovieRepository repository;
 
     @Nullable
     @Override
@@ -28,45 +40,89 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        repository = new MovieRepository(AppDatabase.getInstance(requireContext()).watchlistDao());
         setupInteractions();
+        loadPopularMovies();
     }
 
     private void setupInteractions() {
-        // Hero Banner Click
-        binding.heroBanner.setOnClickListener(v -> {
-            Movie dune = new Movie("Dune Part Two", "2024", "2h 46m", "8.6", "PG-13", 
-                "Paul Atreides unites with Chani and the Fremen while seeking revenge against the conspirators who destroyed his family.", 0);
-            openMovieDetails(dune);
-        });
-        
-        // Buttons
-        binding.btnPlayNow.setOnClickListener(v -> Toast.makeText(getContext(), "Starting Movie...", Toast.LENGTH_SHORT).show());
-        binding.btnMyList.setOnClickListener(v -> Toast.makeText(getContext(), "Added to My List", Toast.LENGTH_SHORT).show());
-        
-        // Header Icons
-        binding.notificationContainer.setOnClickListener(v -> Toast.makeText(getContext(), "Notifications Clicked", Toast.LENGTH_SHORT).show());
-        binding.ivCast.setOnClickListener(v -> Toast.makeText(getContext(), "Casting...", Toast.LENGTH_SHORT).show());
-        
-        // Search & Filter
+        binding.heroBanner.setOnClickListener(v -> openMovieDetails(MovieCatalog.heroMovie()));
+
+        binding.btnPlayNow.setOnClickListener(v -> Toast.makeText(getContext(), "Streaming Dune...", Toast.LENGTH_SHORT).show());
+        binding.btnMyList.setOnClickListener(v -> Toast.makeText(getContext(), "Added to Watchlist", Toast.LENGTH_SHORT).show());
+
         binding.searchBarCard.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), SearchActivity.class);
             startActivity(intent);
         });
-        binding.ivFilter.setOnClickListener(v -> Toast.makeText(getContext(), "Opening Filters...", Toast.LENGTH_SHORT).show());
 
-        // Individual Movie Card Clicks
-        binding.cardOppenheimer.setOnClickListener(v -> openMovieDetails(new Movie("Oppenheimer", "2023", "3h 0m", "8.4", "R", "Historical drama.", 0)));
-        binding.cardThebatman.setOnClickListener(v -> openMovieDetails(new Movie("The Batman", "2022", "2h 56m", "8.1", "PG-13", "Detective thriller.", 0)));
-        binding.cardAvatartwo.setOnClickListener(v -> openMovieDetails(new Movie("Avatar 2", "2022", "3h 12m", "7.6", "PG-13", "Water world.", 0)));
-        binding.cardSpiderman.setOnClickListener(v -> openMovieDetails(new Movie("Spider-Man", "2023", "2h 20m", "8.2", "PG-13", "Multiverse action.", 0)));
-        binding.cardJohnwickfour.setOnClickListener(v -> openMovieDetails(new Movie("John Wick 4", "2023", "2h 49m", "8.1", "R", "Action thriller.", 0)));
-        binding.cardInterstellar.setOnClickListener(v -> openMovieDetails(new Movie("Interstellar", "2014", "2h 49m", "8.7", "PG-13", "Space journey.", 0)));
+        binding.rvContinueWatching.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
+        binding.rvContinueWatching.setAdapter(new MovieAdapter(MovieCatalog.continueWatching(), true, this));
+
+        binding.rvTrending.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
+        binding.rvTrending.setAdapter(new MovieAdapter(MovieCatalog.trending(), false, this));
+
+        setupGenreRow(binding.rvAction, MovieCatalog.actionMovies());
+        setupGenreRow(binding.rvComedy, MovieCatalog.comedyMovies());
+        setupGenreRow(binding.rvHorror, MovieCatalog.horrorMovies());
+        setupGenreRow(binding.rvRomance, MovieCatalog.romanceMovies());
+        setupGenreRow(binding.rvSciFi, MovieCatalog.sciFiMovies());
+    }
+
+    private void setupGenreRow(RecyclerView recyclerView, java.util.List<Movie> fallbackMovies) {
+        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerView.setAdapter(new MovieAdapter(fallbackMovies, false, this));
+    }
+
+    private void loadPopularMovies() {
+        repository.getPopularMovies(new Callback<MovieResponse>() {
+            @Override
+            public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
+                if (binding == null || !response.isSuccessful() || response.body() == null) {
+                    return;
+                }
+                binding.rvTrending.setAdapter(new MovieAdapter(MovieMapper.fromDtoList(response.body().getResults()), false, HomeFragment.this));
+            }
+
+            @Override
+            public void onFailure(Call<MovieResponse> call, Throwable t) {
+                if (getContext() != null) {
+                    Toast.makeText(getContext(), "Using offline movie data", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        loadGenreMovies(28, binding.rvAction);
+        loadGenreMovies(35, binding.rvComedy);
+        loadGenreMovies(27, binding.rvHorror);
+        loadGenreMovies(10749, binding.rvRomance);
+        loadGenreMovies(878, binding.rvSciFi);
+    }
+
+    private void loadGenreMovies(int genreId, RecyclerView recyclerView) {
+        repository.discoverMoviesByGenre(genreId, new Callback<MovieResponse>() {
+            @Override
+            public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
+                if (binding == null || !response.isSuccessful() || response.body() == null) {
+                    return;
+                }
+                recyclerView.setAdapter(new MovieAdapter(MovieMapper.fromDtoList(response.body().getResults()), false, HomeFragment.this));
+            }
+
+            @Override
+            public void onFailure(Call<MovieResponse> call, Throwable t) {
+            }
+        });
     }
 
     private void openMovieDetails(Movie movie) {
         Intent intent = new Intent(getContext(), MovieDetailsActivity.class);
         intent.putExtra("movie", movie);
         startActivity(intent);
+    }
+
+    @Override
+    public void onMovieClick(Movie movie) {
+        openMovieDetails(movie);
     }
 
     @Override

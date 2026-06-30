@@ -6,14 +6,21 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import kh.edu.rupp.myapplication.databinding.ItemMovieWatchlistBinding;
 import kh.edu.rupp.myapplication.models.Movie;
+import kh.edu.rupp.myapplication.utils.MovieImageLoader;
 import java.util.List;
 
 public class WatchlistAdapter extends RecyclerView.Adapter<WatchlistAdapter.ViewHolder> {
 
     private final List<Movie> movies;
+    private final OnWatchlistItemClickListener listener;
 
-    public WatchlistAdapter(List<Movie> movies) {
+    public interface OnWatchlistItemClickListener {
+        void onWatchlistItemClick(Movie movie);
+    }
+
+    public WatchlistAdapter(List<Movie> movies, OnWatchlistItemClickListener listener) {
         this.movies = movies;
+        this.listener = listener;
     }
 
     @NonNull
@@ -29,8 +36,12 @@ public class WatchlistAdapter extends RecyclerView.Adapter<WatchlistAdapter.View
         Movie movie = movies.get(position);
         holder.binding.tvTitle.setText(movie.getTitle());
         holder.binding.tvInfo.setText(movie.getYear() + " • " + movie.getDuration());
-        // For actual implementation, use Glide/Picasso to load images
-        // holder.binding.ivPoster.setImageResource(movie.getPosterResId());
+        MovieImageLoader.load(holder.binding.ivPoster, movie);
+        holder.itemView.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onWatchlistItemClick(movie);
+            }
+        });
     }
 
     @Override

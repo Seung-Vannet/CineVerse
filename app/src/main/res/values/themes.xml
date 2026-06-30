@@ -1,27 +1,22 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme -->
     <style name="Theme.Cineverse" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Primary brand color. -->
         <item name="colorPrimary">@color/cine_primary</item>
         <item name="colorOnPrimary">@color/white</item>
-        <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/cine_surface</item>
         <item name="colorOnSecondary">@color/cine_text_primary</item>
-        
-        <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/cine_background</item>
         <item name="android:windowLightStatusBar">false</item>
-        
-        <!-- Background color -->
         <item name="android:windowBackground">@color/cine_background</item>
     </style>
 
-    <style name="RoundedImageView">
+    <!-- Fixed Shape Appearance Styles -->
+    <style name="RoundedImageView" parent="ShapeAppearance.Material3.SmallComponent">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">12dp</item>
     </style>
 
-    <style name="CircleImageView">
+    <style name="CircleImageView" parent="ShapeAppearance.Material3.SmallComponent">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
     </style>

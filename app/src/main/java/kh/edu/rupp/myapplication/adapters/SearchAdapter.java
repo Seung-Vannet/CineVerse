@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import kh.edu.rupp.myapplication.databinding.ItemSearchMovieBinding;
 import kh.edu.rupp.myapplication.models.Movie;
+import kh.edu.rupp.myapplication.utils.MovieImageLoader;
 import java.util.List;
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder> {
@@ -35,7 +36,8 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         Movie movie = movies.get(position);
         holder.binding.tvTitle.setText(movie.getTitle());
         holder.binding.tvYear.setText(movie.getYear());
-        holder.binding.ivPoster.setImageResource(android.R.color.darker_gray); // Placeholder
+        
+        MovieImageLoader.load(holder.binding.ivPoster, movie);
 
         holder.itemView.setOnClickListener(v -> {
             if (listener != null) {
