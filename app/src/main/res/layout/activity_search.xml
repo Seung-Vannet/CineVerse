@@ -291,7 +291,7 @@
                         android:layout_width="60dp"
                         android:layout_height="80dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/spiderman"
+                        android:src="@drawable/spiderman_across_the_spiderverse"
                         app:shapeAppearanceOverlay="@style/RoundedImageView" />
                     <LinearLayout
                         android:layout_width="0dp"

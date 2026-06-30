@@ -310,7 +310,7 @@ fun ContinueWatchingList() {
 @Composable
 fun TrendingNowList() {
     val movies = listOf(
-        TrendingMovie("Spider-Man", 8.7, R.drawable.spiderman),
+        TrendingMovie("Spider-Man", 8.7, R.drawable.spiderman_across_the_spiderverse),
         TrendingMovie("John Wick", 8.1, R.drawable.johnwickfour),
         TrendingMovie("Interstellar", 8.6, R.drawable.interstellar),
         TrendingMovie("The Batman", 8.4, R.drawable.thebatman)
