@@ -91,11 +91,6 @@ public class HomeFragment extends Fragment implements MovieAdapter.OnMovieClickL
                 }
             }
         });
-        loadGenreMovies(28, binding.rvAction);
-        loadGenreMovies(35, binding.rvComedy);
-        loadGenreMovies(27, binding.rvHorror);
-        loadGenreMovies(10749, binding.rvRomance);
-        loadGenreMovies(878, binding.rvSciFi);
     }
 
     private void loadGenreMovies(int genreId, RecyclerView recyclerView) {

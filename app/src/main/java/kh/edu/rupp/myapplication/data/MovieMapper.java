@@ -2,10 +2,12 @@ package kh.edu.rupp.myapplication.data;
 
 import java.util.ArrayList;
 import java.util.List;
+import kh.edu.rupp.myapplication.api.CastDto;
 import kh.edu.rupp.myapplication.api.GenreDto;
 import kh.edu.rupp.myapplication.api.MovieDetailsDto;
 import kh.edu.rupp.myapplication.api.MovieDto;
 import kh.edu.rupp.myapplication.db.MovieEntity;
+import kh.edu.rupp.myapplication.models.CastMember;
 import kh.edu.rupp.myapplication.models.Movie;
 
 public final class MovieMapper {
@@ -81,6 +83,22 @@ public final class MovieMapper {
                 0,
                 buildPosterUrl(dto.getBackdropPath() != null ? dto.getBackdropPath() : dto.getPosterPath())
         );
+    }
+
+    public static List<CastMember> fromCastDtoList(List<CastDto> castDtos) {
+        List<CastMember> castMembers = new ArrayList<>();
+        if (castDtos == null) {
+            return castMembers;
+        }
+        for (int i = 0; i < castDtos.size() && i < 12; i++) {
+            CastDto dto = castDtos.get(i);
+            castMembers.add(new CastMember(
+                    valueOrDefault(dto.getName(), "Unknown"),
+                    valueOrDefault(dto.getCharacter(), ""),
+                    buildPosterUrl(dto.getProfilePath())
+            ));
+        }
+        return castMembers;
     }
 
     private static double parseRating(String rating) {

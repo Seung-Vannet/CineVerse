@@ -136,6 +136,17 @@
             <!-- Chips added dynamically -->
         </com.google.android.material.chip.ChipGroup>
 
+        <TextView
+            android:id="@+id/tvTrailerState"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="8dp"
+            android:text="Trailer unavailable"
+            android:textColor="@color/cine_text_secondary"
+            android:textSize="14sp"
+            android:visibility="gone" />
+
         <!-- Buttons -->
         <LinearLayout
             android:layout_width="match_parent"
@@ -185,6 +196,34 @@
                 app:icon="@android:drawable/stat_sys_download"
                 app:iconTint="@color/white" />
         </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/castHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cast"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvCast"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:clipToPadding="false"
+            android:nestedScrollingEnabled="false"
+            android:orientation="horizontal"
+            android:paddingHorizontal="8dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_cast" />
 
         <!-- Similar Movies -->
         <RelativeLayout

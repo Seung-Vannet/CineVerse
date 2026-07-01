@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -13,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import kh.edu.rupp.myapplication.MovieDetailsActivity;
 import kh.edu.rupp.myapplication.adapters.WatchlistAdapter;
-import kh.edu.rupp.myapplication.data.MovieCatalog;
 import kh.edu.rupp.myapplication.data.MovieMapper;
 import kh.edu.rupp.myapplication.data.MovieRepository;
 import kh.edu.rupp.myapplication.db.AppDatabase;
@@ -46,9 +46,6 @@ public class WatchlistFragment extends Fragment implements WatchlistAdapter.OnWa
     private void observeWatchlist() {
         viewModel.getWatchlist().observe(getViewLifecycleOwner(), entities -> {
             List<Movie> movies = toMovies(entities);
-            if (movies.isEmpty()) {
-                movies = MovieCatalog.watchlistSeed();
-            }
             renderWatchlist(movies);
         });
     }
@@ -115,6 +112,14 @@ public class WatchlistFragment extends Fragment implements WatchlistAdapter.OnWa
         Intent intent = new Intent(requireContext(), MovieDetailsActivity.class);
         intent.putExtra("movie", movie);
         startActivity(intent);
+    }
+
+    @Override
+    public void onWatchlistRemoveClick(Movie movie) {
+        if (movie.getId() > 0) {
+            viewModel.removeFromWatchlist(movie.getId());
+            Toast.makeText(requireContext(), "Removed from Watchlist", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

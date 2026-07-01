@@ -18,6 +18,12 @@ public interface ApiService {
     @GET("movie/{movie_id}")
     Call<MovieDetailsDto> getMovieDetails(@Path("movie_id") int movieId, @Query("api_key") String apiKey);
 
+    @GET("movie/{movie_id}/credits")
+    Call<CreditsResponse> getMovieCredits(@Path("movie_id") int movieId, @Query("api_key") String apiKey);
+
+    @GET("movie/{movie_id}/videos")
+    Call<VideosResponse> getMovieVideos(@Path("movie_id") int movieId, @Query("api_key") String apiKey);
+
     @GET("discover/movie")
     Call<MovieResponse> discoverMoviesByGenre(
             @Query("api_key") String apiKey,

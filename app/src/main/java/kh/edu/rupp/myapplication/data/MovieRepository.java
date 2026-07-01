@@ -3,8 +3,10 @@ package kh.edu.rupp.myapplication.data;
 import androidx.lifecycle.LiveData;
 import kh.edu.rupp.myapplication.BuildConfig;
 import kh.edu.rupp.myapplication.api.ApiService;
+import kh.edu.rupp.myapplication.api.CreditsResponse;
 import kh.edu.rupp.myapplication.api.MovieDetailsDto;
 import kh.edu.rupp.myapplication.api.MovieResponse;
+import kh.edu.rupp.myapplication.api.VideosResponse;
 import kh.edu.rupp.myapplication.api.RetrofitClient;
 import kh.edu.rupp.myapplication.db.WatchlistDao;
 import kh.edu.rupp.myapplication.db.MovieEntity;
@@ -39,6 +41,14 @@ public class MovieRepository {
         apiService.getMovieDetails(movieId, API_KEY).enqueue(callback);
     }
 
+    public void getMovieCredits(int movieId, Callback<CreditsResponse> callback) {
+        apiService.getMovieCredits(movieId, API_KEY).enqueue(callback);
+    }
+
+    public void getMovieVideos(int movieId, Callback<VideosResponse> callback) {
+        apiService.getMovieVideos(movieId, API_KEY).enqueue(callback);
+    }
+
     public void discoverMoviesByGenre(int genreId, Callback<MovieResponse> callback) {
         apiService.discoverMoviesByGenre(API_KEY, genreId, "popularity.desc").enqueue(callback);
     }
@@ -54,6 +64,10 @@ public class MovieRepository {
 
     public void removeFromWatchlist(MovieEntity movie) {
         new Thread(() -> watchlistDao.deleteMovie(movie)).start();
+    }
+
+    public void removeFromWatchlistById(int movieId) {
+        new Thread(() -> watchlistDao.deleteMovieById(movieId)).start();
     }
     
     public LiveData<Boolean> isFavorite(int id) {

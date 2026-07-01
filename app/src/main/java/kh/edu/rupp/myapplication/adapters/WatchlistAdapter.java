@@ -16,6 +16,7 @@ public class WatchlistAdapter extends RecyclerView.Adapter<WatchlistAdapter.View
 
     public interface OnWatchlistItemClickListener {
         void onWatchlistItemClick(Movie movie);
+        void onWatchlistRemoveClick(Movie movie);
     }
 
     public WatchlistAdapter(List<Movie> movies, OnWatchlistItemClickListener listener) {
@@ -40,6 +41,11 @@ public class WatchlistAdapter extends RecyclerView.Adapter<WatchlistAdapter.View
         holder.itemView.setOnClickListener(v -> {
             if (listener != null) {
                 listener.onWatchlistItemClick(movie);
+            }
+        });
+        holder.binding.ivRemove.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onWatchlistRemoveClick(movie);
             }
         });
     }

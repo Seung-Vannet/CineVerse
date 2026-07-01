@@ -16,4 +16,8 @@ public class WatchlistViewModel extends ViewModel {
     public LiveData<List<MovieEntity>> getWatchlist() {
         return repository.getWatchlist();
     }
+
+    public void removeFromWatchlist(int movieId) {
+        repository.removeFromWatchlistById(movieId);
+    }
 }

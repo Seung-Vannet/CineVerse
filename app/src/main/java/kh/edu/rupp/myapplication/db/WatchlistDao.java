@@ -19,6 +19,9 @@ public interface WatchlistDao {
     @Delete
     void deleteMovie(MovieEntity movie);
 
+    @Query("DELETE FROM watchlist WHERE id = :id")
+    void deleteMovieById(int id);
+
     @Query("SELECT EXISTS(SELECT * FROM watchlist WHERE id = :id)")
     LiveData<Boolean> isFavorite(int id);
 }
